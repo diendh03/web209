@@ -6,7 +6,7 @@ const Login = () => {
   const [gioitinh, setGioiTinh] = useState<string>("");
   const [role, setRole] = useState<string>("");
   const [date, setDate] = useState<number>(0);
-  const [level, setLevel] = useState<string>("");
+  const [level, setLevel] = useState<number>(0);
   const [errors, setErrors] = useState<any>();
   const [total, setTotal] = useState<number>(0);
   const [isDisplay, setIsDisplay] = useState<boolean>(false);
@@ -41,12 +41,12 @@ const Login = () => {
     } else {
       setErrors([]);
       setIsDisplay(true);
-      if (level === "Bậc 1") {
-        setTotal(1200 * date);
-      } else if (level === "Bậc 2") {
-        setTotal(2400 * date);
-      } else if (level === "Bậc 3") {
-        setTotal(3600 * date);
+      if (level === 1) {
+        setTotal(1200 * date * level);
+      } else if (level === 2) {
+        setTotal(2400 * date * level);
+      } else if (level === 3) {
+        setTotal(3600 * date * level);
       }
     }
   };
@@ -104,13 +104,13 @@ const Login = () => {
             name=""
             id=""
             onChange={(event) => {
-              setLevel(event.target.value);
+              setLevel(+event.target.value);
             }}
           >
             <option value="" hidden></option>
-            <option value="Bậc 1">Bậc 1</option>
-            <option value="Bậc 2">Bậc 2</option>
-            <option value="Bậc 3">Bậc 3</option>
+            <option value="1">Bậc 1</option>
+            <option value="2">Bậc 2</option>
+            <option value="3">Bậc 3</option>
           </select>
         </div>
         <div>
@@ -144,13 +144,13 @@ const Login = () => {
           <div>
             {gioitinh === "Nam" ? (
               <p>
-                Ông {username} {level} là {role} được chi trả {total} tiền nằm
-                viện
+                Ông {username} bậc {level} là {role} được chi trả {total} tiền
+                nằm viện
               </p>
             ) : (
               <p>
-                Bà {username} {level} là {role} được chi trả {total} tiền nằm
-                viện
+                Bà {username} bậc {level} là {role} được chi trả {total} tiền
+                nằm viện
               </p>
             )}
           </div>
